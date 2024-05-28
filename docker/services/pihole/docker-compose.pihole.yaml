@@ -1,0 +1,21 @@
+services:
+  pihole:
+    container_name: pihole
+    hostname: pihole
+    image: pihole/pihole:latest
+    networks:
+      dns_net:
+        ipv4_address: 172.23.0.7
+      proxy:
+    ports:
+      - "5053:53/tcp"
+      - "5053:53/udp"
+      - "85:80/tcp"
+    environment:
+      TZ: 'America/New_York'
+      WEBPASSWORD: 'password'
+      PIHOLE_DNS_: '1.1.1.2#53;1.0.0.2#53' # Cloudflare Malaware Blocking DNS as upstream
+    volumes:
+      - '/home/sbuglione/docker/pihole/etc-pihole/:/etc/pihole/'
+      - '/home/sbuglione/docker/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    restart: unless-stopped

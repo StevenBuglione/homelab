@@ -1,0 +1,11 @@
+services:
+  portainer:
+    extends:
+      file: ../../docker/services/portainer/docker-compose.portainer.yaml
+      service: portainer
+
+  pihole:
+    extends:
+      file: ../../docker/services/pihole/docker-compose.pihole.yaml
+      service: pihole
+
